@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="tower_details_form">
+            <field name="name">tower_details_form</field>
+            <field name="model">tower.details</field>
+            <field name="arch" type="xml">
+                <form string="Tower Details Details">
+                    <sheet>
+                        <group>
+                            <field name="property_creation_id"/>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="tower_details_tree">
+            <field name="name">tower_details_tree</field>
+            <field name="model">tower.details</field>
+            <field name="arch" type="xml">
+                <tree string="Property Listing List">
+                    <field name="property_creation_id"/>
+                     <field name="name"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_tower_details">
+            <field name="name">Tower Details</field>
+            <field name="res_model">tower.details</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+
+              <p class="o_view_nocontent_empty_folder">
+                No tower found
+              </p>
+            </field>
+        </record>
+
+        <menuitem name="Tower Details" id="menu_tower_details" parent="cr_property.menu_property_details" action="action_tower_details" sequence="3" />
+
+    </data>
+</odoo>

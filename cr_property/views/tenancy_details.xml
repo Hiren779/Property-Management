@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="tenancy_details_form">
+        <field name="name">tenancy_details_form</field>
+        <field name="model">tenancy.details</field>
+        <field name="arch" type="xml">
+            <form string="Tenancy Details">
+                <header>
+                    <button attrs="{'invisible': [('state', 'in', ['in_progress'])]}" name="create_rent_record" type='object' string="Create Rent Schedule" class="oe_highlight"/>
+                    <field name="state" widget="statusbar" statusbar_visible="new,in_progress,cancel"/>
+                </header>
+                <sheet>
+                    <h1>Property Information</h1>
+                    <group>
+                        <group><field name="name"/></group>
+                        <group><field name="tenant_id" domain="[('property_for','in',['rent']),('state','in',['booked'])]"/></group>
+                        <group><field name="property_creation_id"/></group>
+                        <group><field name="property_id"/></group>
+                    </group>
+                    <h1>
+                        Tenancy Information
+                    </h1>
+                    <group>
+                        <group><field name="tenancy_rent"/></group>
+                        <group><field name="tenancy_deposit"/></group>
+                   </group>
+                        <h1>
+                            Contract Details
+                        </h1>
+                    <group>
+                        <group> <field name="start_date"/> </group>
+                        <group><field name="expiration_date"/> </group>
+                    </group>
+                    <group>
+                       <group> <field name="rent_type"/> </group>
+                       <group> <field name="total_rent"/> </group>
+                    </group>
+                    <notebook>
+                        <page string="Rent schedule" class="oe_highlight">
+                            <field name="rent_schedule_line_ids">
+                                <tree>
+                                    <field name="tenant_id"/>
+                                    <field name="property_creation_id"/>
+                                    <field name="property_id"/>
+                                    <field name ="date"/>
+                                    <field name ="amount"/>
+                                    <field name ="pending_amount"/>
+                                    <field name="paid"/>
+                                    <button name="amount_paid" attrs="{'invisible': [('paid', '=', True)]}"  type='object' string="Paid" class="oe_highlight"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="tenancy_details_tree">
+            <field name="name">tenancy_details_tree</field>
+            <field name="model">tenancy.details</field>
+            <field name="arch" type="xml">
+                <tree string="Tenancy Details List">
+                   <field name="tenant_id" readonly="True"/>
+                    <field name="property_creation_id" readonly="True"/>
+                    <field name="property_id" readonly="True"/>
+                    <field name="tenancy_rent"/>
+                    <field name="tenancy_deposit"/>
+                    <field name="start_date"/>
+                    <field name="expiration_date"/>
+                    <field name="rent_type"/>
+                    <field name="total_rent" readonly="True"/>
+                </tree>
+            </field>
+        </record>
+
+    <record model="ir.actions.act_window" id="action_tenancy_details">
+        <field name="name">Tenancy Details</field>
+        <field name="res_model">tenancy.details</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_empty_folder">
+            No Tenancy Found
+          </p>
+        </field>
+    </record>
+
+    <menuitem name="Tenancy Details" id ="menu_tenancy_details" parent="cr_property.menu_tenant_details" action ="cr_property.action_tenancy_details" sequence = "7"></menuitem>
+</odoo>

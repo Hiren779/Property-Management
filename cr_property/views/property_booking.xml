@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="property_booking_form" model="ir.ui.view">
+            <field name="name">Property Booking</field>
+            <field name="model">property.booking</field>
+            <field name="arch" type="xml">
+                <form string="Booking Details">
+                    <header>
+                        <button attrs="{'invisible': [('state', 'in', ['cancel','booked','pending'])]}" string="Pending" type="object" name="Pending_booking" class="oe_highlight"/>
+                        <button attrs="{'invisible': [('state', 'in', ['draft','booked','pending'])]}" string="Draft" type="object" name="Draft_booking" class="oe_highlight"/>
+                        <button attrs="{'invisible': [('state', 'in', ['cancel','booked'])]}" string="Confirm" type="object" name="Confirm_booking" class="oe_highlight"/>
+                        <button attrs="{'invisible': [('state', 'in', ['cancel','booked'])]}" string="Cancel" type="object" name="Cancel_booking" class="oe_highlight"/>
+
+
+                        <field name="state" widget="statusbar" statusbar_visible="draft,pending,booked"/>
+                    </header>
+                    <sheet>
+
+
+
+                        <group>
+                            <group>
+                                <field name="property_for" attrs="{'readonly': [('state', 'in', ['booked'])]}"/>
+                                <field name="tenant_id" domain="[('property_for','=',property_for)]" attrs="{'readonly': [('state', 'in', ['booked'])]}"/>
+                                <field name="email" attrs="{'readonly': [('state', 'in', ['booked'])]}"/>
+                                <field name="date_of_birth" attrs="{'readonly': [('state', 'in', ['booked'])]}"/>
+                                <field name="gender" attrs="{'readonly': [('state', 'in', ['booked'])]}" />
+                                <field name="owner_name" attrs="{'readonly': [('state', 'in', ['booked'])]}"/>
+                                <field name="maritial_status" attrs="{'readonly': [('state', 'in', ['booked'])]}"/>
+                                <field name="property_creation_id" widget="selection" attrs="{'readonly': [('state', 'in', ['booked'])]}"/>
+                                <field name="tower_name" domain="[('property_creation_id', '=', property_creation_id)]" widget='selection' attrs="{'readonly': [('state', 'in', ['booked'])]}"/>
+                                <field name="property_id"  domain="[('state','in',['draft']),('property_creation_id', '=', property_creation_id),('tower_name', '=',tower_name),('property_for','=',property_for)]" attrs="{'readonly': [('state', 'in', ['booked'])]}"/>
+                                <field name="tenancy_id" attrs="{'readonly': [('state', 'in', ['booked'])],'invisible': [('state', 'in', ['draft','pending'])]}"/>
+                            </group>
+                            <group>
+                                <label for="street" string="Address"/>
+                                <div class="o_address_format" name="div_address">
+                                    <field name="street" placeholder="Street..." class="o_address_street"/>
+                                    <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                                    <field name="city" placeholder="City" class="o_address_city"/>
+                                    <field name="state_id" class="o_address_state" placeholder="State" options="{&quot;no_open&quot;: True}" context="{'country_id': country_id, 'zip': zip}"/>
+                                    <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                    <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
+                                </div>
+                            </group>
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+         <record id="property_booking_tree" model="ir.ui.view">
+            <field name="name">Booking list</field>
+            <field name="model">property.booking</field>
+            <field name="arch" type="xml">
+                <tree string="Booking List">
+                    <field name="tenant_id"/>
+                    <field name="email"/>
+                    <field name="gender"/>
+                     <field name="property_creation_id"/>
+                    <field name="property_id"/>
+                    <field name="property_for"/>
+                    <field name="state" string="Status"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_property_booking">
+            <field name="name">Property Bookings</field>
+            <field name="res_model">property.booking</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_empty_folder">
+                No Booking Found
+              </p>
+            </field>
+        </record>
+
+        <menuitem name="Booking" id ="menu_property_bookings" parent="cr_property.property" action ="cr_property.action_property_booking" sequence = "2"></menuitem>
+
+    </data>
+</odoo>

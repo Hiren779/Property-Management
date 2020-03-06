@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+          <record model="ir.ui.view" id="rent_schedule_tree">
+            <field name="name">tenancy_rent_details_tree</field>
+            <field name="model">rent.schedule</field>
+            <field name="arch" type="xml">
+                <tree string="Tenancy Rent  Details List">
+                   <field name="tenant_id"/>
+                    <field name="property_creation_id"/>
+                    <field name="property_id"/>
+                    <field name ="date"/>
+                    <field name ="amount"/>
+                    <field name ="pending_amount"/>
+                    <field name="paid"/>
+                    <button name="amount_paid" attrs="{'invisible': [('paid', '=', True)]}"  type='object' string="Paid" class="oe_highlight"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

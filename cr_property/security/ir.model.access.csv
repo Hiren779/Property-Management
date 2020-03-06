@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_property_creation,access_property_creation,model_property_creation,base.group_user,1,1,1,1
+access_property_property,access_property_property,model_property_property,base.group_user,1,1,1,1
+access_property_booking,access_property_booking,model_property_booking,base.group_user,1,1,1,1
+access_tower_details,access_tower_details,model_tower_details,base.group_user,1,1,1,1
+access_property_aminities,access_property_aminities,model_property_aminities,base.group_user,1,1,1,1
+access_tenant_info,access_tenant_info,model_tenant_info,base.group_user,1,1,1,1
+access_tenancy_details,access_tenancy_details,model_tenancy_details,base.group_user,1,1,1,1
+access_rent_schedule,access_rent_schedule,model_rent_schedule,base.group_user,1,1,1,1
+access_property_images,access_property_images,model_property_images,base.group_user,1,1,1,1
+access_property_image,access_property_image,model_property_image,base.group_user,1,1,1,1

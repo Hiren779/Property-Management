@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_property_image_form">
+        <field name="name">property.image.form</field>
+        <field name="model">property.image</field>
+        <field name="arch" type="xml">
+            <form string="Property Images">
+                <div class="row o_website_sale_image_modal">
+                    <div class="col-md-6 col-xl-5">
+                        <div class="oe_title">
+                            <label class="small text-muted" for="name" string="Image Name"/>
+                            <h2><field name="name" placeholder="Image Name" required="True"/></h2>
+                            <field name="property_creation_id" invisible="1"/>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-xl-12 text-center o_website_sale_image_modal_container">
+                        <field name="images1" widget="image"/>
+                    </div>
+                </div>
+            </form>
+        </field>
+    </record>
+</odoo>

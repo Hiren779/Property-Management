@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="property_listing_form">
+            <field name="name">property_listing_form</field>
+            <field name="model">property.property</field>
+            <field name="arch" type="xml">
+                <form string="Property Listing Details">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,unsold,sold"/>
+                    </header>
+                    <sheet>
+
+                        <div class="oe_button_box">
+                        <button class="oe_stat_button" name="button_rent_contract" string='Contract' type="object" icon="fa-home">
+                        </button>
+                        </div>
+
+                        <group>
+                            <field name="property_creation_id" readonly="True"/>
+                            <field name="properties" readonly="True"/>
+                            <field name="tower_name" readonly="True"/>
+                             <field name="property_for"/>
+                            <field name="carpet_area"/>
+                            <field name="facing"/>
+                            <field name="flat_type"/>
+                            <field name="bathroom"/>
+                            <field name="furnished"/>
+                            <field name="property_price" readonly="True"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="property_listing_tree">
+            <field name="name">property_listing_tree</field>
+            <field name="model">property.property</field>
+            <field name="arch" type="xml">
+                <tree string="Property Listing List">
+                    <field name="property_creation_id"/>
+                    <field name="tower_name"/>
+                     <field name="properties"/>
+                    <field name="flat_type"/>
+                    <field name="furnished"/>
+                    <field name="property_price"/>
+                      <field name="property_for"/>
+                    <field name="state" string="Status"/>
+                </tree>
+            </field>
+        </record>
+
+         <record model="ir.ui.view" id="property_search_view">
+            <field name="name">property_search_view</field>
+            <field name="model">property.property</field>
+            <field name="arch" type="xml">
+                <search>
+                    <group string="Group By">
+                        <filter string="Property Status" name="state" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_property_listing_details">
+            <field name="name">Property Listing</field>
+            <field name="res_model">property.property</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+
+              <p class="o_view_nocontent_empty_folder">
+                No property found
+              </p>
+            </field>
+        </record>
+
+        <menuitem name="Property Details" id="menu_property_listing_details" parent="cr_property.menu_property_details" action="action_property_listing_details" sequence="2" />
+
+    </data>
+</odoo>
